@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light" style="border-bottom: 1px  solid #095887;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <span> Backend Development </span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 59%;">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/polls">Poll</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/create">Create Poll</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-6 offset-3">
+                <div class="card card-body">
+                    <h5>Title: <%= poll.title %></h5>
+                    <p>Description: <%= poll.description %></p>
+                    <div class="my-2">
+                        <h5>Result: </h5>
+                        <ul class="list-group">
+                            <%for(let r of result){%>
+                            <li class="list-group-item">
+                                <p>
+                                    <%= r.name %> <strong>---<%= r.percentage.toFixed(2) %> %</strong>
+                                </p>
+                            </li>
+                            <%}%>
+                        </ul>
+                    </div>
+                    <div class="mt-4">
+                        <h5>What is your Opinion</h5>
+                        <form action="/polls/<%= poll._id %>" method="POST">
+                            <% for (let option of poll.options ){%>
+                            <div class="custom-control custom-radio">
+
+                                <input type="radio" name="option" id="<%=option._id %>" class="custom-control-input"
+                                    value="<%= option._id%>">
+
+                                <label for="<%=option._id %>" class="custom-control-label">
+                                    <%=option.name %>
+                                </label>
+                            </div>
+                            <% } %>
+                            <input type="submit" value="submit your opinion" class="btn btn-primary mt-2">
+                            </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
