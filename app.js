@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const PollController = require('./pollController')
 
 const app = express()
+const PORT = process.env.PORT || 4545;
 
 //middleware
 app.use(morgan('dev'))
@@ -36,8 +37,8 @@ mongoose.connect(uri, {
         useUnifiedTopology: true
     })
     .then(() => {
-        app.listen(4545, () => {
-            console.log('app is ready to server on port 4545');
+        app.listen(PORT, () => {
+            console.log(`app is ready to server on port ${PORT}`);
         })
     }).catch((error) => {
         console.log(error);
